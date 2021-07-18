@@ -1,10 +1,11 @@
 import React from 'react';
 import './HornedBeast.css';
-import Button from 'react-bootstrap/Button'; 
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 class HornedBeast extends React.Component {
-  
-  constructor(props){
+
+  constructor(props) {
     super(props);
     this.state = {
       startingValue: 0,
@@ -14,7 +15,8 @@ class HornedBeast extends React.Component {
 
   addItUp = () => {
     this.setState({
-      startingValue: this.state.startingValue + 1,
+      startingValue: this.state.startingValue + 1, 
+      favorite: true,
     })
   }
 
@@ -24,25 +26,31 @@ class HornedBeast extends React.Component {
     })
   }
 
-  render(){
+  render() {
 
-    return(
-      <>
-      <h2>{this.props.title}</h2>
+    return (
 
-      <img 
-      src={this.props.imageUrl} 
-      alt={this.props.alt}
-      title={this.props.title}
-      />
-      <p>{this.state.startingValue ? this.state.startingValue : '0'} Favorites</p>
+      <Card>
+        <Card.Img
+          variant="top"
+          src={this.props.imageUrl}
+          alt={this.props.alt}
+          onClick={this.props.getShowModal}
+        />
+        <Card.Body>
+          <Card.Title>{this.props.title}</Card.Title>
+          <Card.Text>
 
-      <p>{this.state.favorite ? '❤️' : ''}</p>
-      
-      <p>{this.props.description}</p>
-      <Button variant="outline-success" onClick={this.addItUp}>Favorite</Button>
-      <Button variant="outline-danger" onClick={this.takeAway}>Not your favorite</Button>
-      </>
+          </Card.Text>
+        </Card.Body>
+
+        <p>{this.state.startingValue ? this.state.startingValue : '0'} Favorite</p>
+        <p>{this.state.favorite ? '❤️' : ' '}</p>
+
+        <p>{this.props.description}</p>
+        <Button variant="outline-success" onClick={this.addItUp}>Favorite</Button>
+        <Button variant="outline-danger" onClick={this.takeAway}>Not your favorite</Button>
+      </Card>
     )
   }
 }
